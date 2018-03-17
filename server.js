@@ -4,16 +4,12 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var path = require("path");
-
-// Requiring Note and Article models
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
-
-// Scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
+
 mongoose.Promise = Promise;
 
 //Define port
@@ -40,9 +36,10 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-// Database configuration with mongoose
+
 mongoose.connect("mongodb://localhost/mongoscraper");
 //mongoose.connect("mongodb://localhost/mongoscraper");
+
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -115,7 +112,7 @@ app.get("/scrape", function(req, res) {
         res.send("Scrape Complete");
 
   });
-  // Tell the browser that we finished scraping the text
+  // finished scraping the text
 });
 
 // This will get the articles we scraped from the mongoDB
@@ -198,7 +195,7 @@ app.post("/notes/save/:id", function(req, res) {
   console.log(req.body)
   // And save the new note the db
   newNote.save(function(error, note) {
-    // Log any errors
+    // Log errors
     if (error) {
       console.log(error);
     }
@@ -222,7 +219,7 @@ app.post("/notes/save/:id", function(req, res) {
   });
 });
 
-// Delete a note
+// Delete note
 app.delete("/notes/delete/:note_id/:article_id", function(req, res) {
   // Use the note id to find and delete it
   Note.findOneAndRemove({ "_id": req.params.note_id }, function(err) {
