@@ -8,7 +8,7 @@ var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 var request = require("request");
 var cheerio = require("cheerio");
-
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.Promise = Promise;
 
@@ -37,7 +37,7 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 
-mongoose.connect("mongodb://localhost/mongoscraper");
+mongoose.connect("mongodb://wayne5:youngmoney@ds117489.mlab.com:17489/heroku_ttj5shwl");
 //mongoose.connect("mongodb://localhost/mongoscraper");
 
 var db = mongoose.connection;
